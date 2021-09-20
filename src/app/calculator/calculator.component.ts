@@ -62,7 +62,8 @@ export class CalculatorComponent implements OnInit {
     const value = target.innerHTML;
     this.pressOperator(value);
   }
-
+  
+  //TODO: e+51 en e-51 (grote getallen afvangen en alsnog de mogelijkheid geven voor een operator toevoegen)
   pressOperator(op : string)
   { 
     if(this.input.charAt(0) == "-" && this.containsOperator(op) == true && this.input.length == 1)
