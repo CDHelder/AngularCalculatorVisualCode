@@ -1,0 +1,78 @@
+<div class="container">
+
+<div class="row">
+
+<div class="col-sm">
+
+    <div style="background-color: lightgrey; padding-left: 5%; padding-right: 5%; padding-top: 5%; padding-bottom: 5%;">
+
+        <h2 class="text-lg-center">Angular Calculator</h2>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Input</span>
+            </div> 
+            <div class="form-control text-lg-right" >{{input}}</div>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Result</span>
+            </div>
+            <div class="form-control text-lg-right">{{result}}</div>
+        </div>
+
+        <div class="col-sm-12 p-1 m-0">
+            <button class="col-sm-6" type="button" (click)="clearAll()">CE</button>
+            <button class="col-sm-3" type="button" (click)="clear()">C</button>
+            <button class="col-sm-3" type="button" (click)="pressOperatorEvent($event)">/</button>
+        </div>
+
+        <div class="col-sm-12 p-1 m-0">
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">7</button>
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">8</button>
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">9</button>
+            <button class="col-sm-3" type="button" (click)="pressOperatorEvent($event)">*</button>
+        </div>
+
+        <div class="col-sm-12 p-1 m-0">
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">4</button>
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">5</button>
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">6</button>
+            <button class="col-sm-3" type="button" (click)="pressOperatorEvent($event)">-</button>
+        </div>
+
+        <div class="col-sm-12 p-1 m-0">
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">1</button>
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">2</button>
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">3</button>
+            <button class="col-sm-3" type="button" (click)="pressOperatorEvent($event)">+</button>
+        </div>
+
+        <div class="col-sm-12 p-1 m-0">
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">.</button>
+            <button class="col-sm-3" type="button" (click)="pressNumEvent($event)">0</button>
+            <button class="col-sm-6" type="button" (click)="calculate()">=</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-sm">
+
+    <div style="background-color: lightgrey; width: 200px; min-height: 100%; padding-left: 5%; padding-right: 5%; padding-top: 5%; padding-bottom: 5%;">
+
+        <h2 class="text-lg-center">History</h2>
+
+        <div >
+            <div style="word-wrap: break-word; white-space: pre-wrap;" class="text-lg-center" >{{history}}</div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
