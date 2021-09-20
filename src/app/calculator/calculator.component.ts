@@ -34,8 +34,16 @@ export class CalculatorComponent implements OnInit {
       }
     }
 
-    if(num === "0"){
-      if(this.input == ""){
+    if(num === "0")
+    {
+      let lastValueString = this.getAfterOpValue()
+
+      if(this.input == "")
+      {
+        return;
+      }
+      else if(lastValueString.length < 1)
+      {
         return;
       }
     }
@@ -57,14 +65,20 @@ export class CalculatorComponent implements OnInit {
 
   pressOperator(op : string)
   { 
-    if(this.containsOperator(this.input) == false)
+    if(this.input.charAt(0) == "-" && this.containsOperator(op) == true && this.input.length == 1)
+    {
+      return;
+    }
+    if(this.containsOperator(this.input) == false && this.input != "")
+    {
+      this.input = this.input + op;
+    }
+    else if(this.containsOperator(this.input) == false && op == "-")
     {
       this.input = this.input + op;
     }
     else
     {
-      let lastValueString = this.getAfterOpValue()
-      
       if(this.input.indexOf("-") == 0)
       {
         let input2 = this.input.substring(1);
@@ -72,8 +86,38 @@ export class CalculatorComponent implements OnInit {
         {
           this.input = this.input + op;
         }
+        else if(this.containsOperator(input2.substr(input2.length - 1)) == true)
+        {
+          if(this.countOperatorOccerences(input2) <= 1 && op == "-" && input2.substr(input2.length - 1) != "-")
+          {
+            this.input = this.input + op;
+          }
+        }
       }
     }
+  }
+
+  countOperatorOccerences(op : string)
+  {
+    let count = 0;
+    if(op.includes("-"))
+    {
+      count += op.split("-").length -1;
+    }
+    if(op.includes("+"))
+    {
+      count += op.split("+").length -1;
+    }
+    if(op.includes("/"))
+    {
+      count += op.split("/").length -1;
+    }
+    if(op.includes("*"))
+    {
+      count += op.split("*").length -1;
+    }
+
+    return count;
   }
 
   containsOperator(op : string) : boolean
@@ -99,6 +143,8 @@ export class CalculatorComponent implements OnInit {
 
   calculate()
   {
+    let lastValueString = this.getAfterOpValue()
+
     if(this.containsOperator(this.input) == false)
     {
       return;
@@ -107,8 +153,11 @@ export class CalculatorComponent implements OnInit {
     {
       return
     }
+    else if(lastValueString.length < 1)
+    {
+      return;
+    }
 
-    let lastValueString = this.getAfterOpValue()
     let firstValueString = this.input.replace(lastValueString, "").replace("*", "").replace("-", "").replace("+", "").replace("/", "");
 
     let lastValue = Number(lastValueString);
@@ -121,12 +170,6 @@ export class CalculatorComponent implements OnInit {
       if(this.input.indexOf("/") > -1)
       {
       this.result = "Cannot divide by zero";
-      return;
-      }
-      if(this.input.indexOf("*") > -1)
-      {
-      this.result = "Cannot multiply by zero";
-      
       return;
       }
     }
