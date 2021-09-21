@@ -48,6 +48,17 @@ export class CalculatorComponent implements OnInit {
       }
     }
 
+    if(num == "." && this.input == "")
+    {
+      this.input = "0" + num;
+      return;
+    }
+    else if(num == "." && this.getAfterOpValue().length == 0 && this.containsOperator(this.input) == true)
+    {
+      this.input = this.input + "0" + num;
+      return
+    }
+
     this.input = this.input + num;
   }
 
@@ -63,14 +74,17 @@ export class CalculatorComponent implements OnInit {
     this.pressOperator(value);
   }
   
-  //TODO: e+51 en e-51 (grote getallen afvangen en alsnog de mogelijkheid geven voor een operator toevoegen)
   pressOperator(op : string)
   { 
     if(this.input.charAt(0) == "-" && this.containsOperator(op) == true && this.input.length == 1)
     {
       return;
     }
-    if(this.containsOperator(this.input) == false && this.input != "")
+    if(this.containsOperator(this.input) == true && this.input.includes("e") && this.countOperatorOccerences(this.input) <= 1)
+    {
+      this.input = this.input + op;
+    }
+    else if(this.containsOperator(this.input) == false && this.input != "")
     {
       this.input = this.input + op;
     }
